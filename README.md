@@ -1,6 +1,6 @@
 # Cord-19
 
- Input Directory: Add the metadata.csv 
+Input Directory: Add the metadata.csv from the CORD-19 dataset
  
  
  Output Directory: contains results. 
