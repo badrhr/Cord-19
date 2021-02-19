@@ -7,7 +7,7 @@ Created on Sat Feb 13 16:04:23 2021
 
 from collections import Counter
 from sklearn.metrics import silhouette_score
-import umap
+import umap.umap_ as umap
 import matplotlib.pyplot as plt
 from wordcloud import WordCloud
 from gensim.models.coherencemodel import CoherenceModel
@@ -89,10 +89,11 @@ def visualize(model):
     vec_umap = reducer.fit_transform(model.vec[model.method])
     print('Calculating UMAP projection. Done!')
     plot_proj(vec_umap, model.cluster_model.labels_)
-    dr = '/kaggle/working/contextual_topic_identification/docs/images/{}/{}'.format(model.method, model.id)
-    if not os.path.exists(dr):
-        os.makedirs(dr)
-    plt.savefig('/kaggle/working/2D_vis')
+    dire = 'output/'
+    if not os.path.exists(dire):
+        os.makedirs(dire)
+    
+    plt.savefig(dire + model.method +'_2D_vis')
 
 def get_wordcloud(model, token_lists, topic):
     """
@@ -115,8 +116,10 @@ def get_wordcloud(model, token_lists, topic):
     plt.imshow(wordcloud)
     plt.axis("off")
     plt.tight_layout(pad=0)
-    dr = '/kaggle/working/{}/{}'.format(model.method, model.id)
-    if not os.path.exists(dr):
-        os.makedirs(dr)
-    plt.savefig('/kaggle/working' + '/Topic' + str(topic) + '_wordcloud')
+
+    drr = 'output/' + model.method
+    if not os.path.exists(drr):
+        os.makedirs(drr)
+    
+    plt.savefig(drr + '/Topic' + str(topic) + '_wordcloud')
     print('Getting wordcloud for topic {}. Done!'.format(topic))
